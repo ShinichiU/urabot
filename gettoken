@@ -1,0 +1,30 @@
+#!/usr/bin/env php
+<?php
+/**
+ * @copyright 2010 Shinichi Urabe
+ */
+
+chdir(dirname(__FILE__));
+require_once './default.inc.php';
+
+$twitter = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
+
+$request_token = $twitter->getRequestToken();
+$url = $twitter->getAuthorizeURL($request_token);
+
+echo "$url\n";
+echo "認可後表示される暗証番号を入力: ";
+
+$pin = trim(fgets(STDIN));
+
+$token = $twitter->getAccessToken($pin);
+if($token['oauth_token'] && $token['oauth_token_secret'])
+{
+  echo "config/config.php に以下の追記をお願いします。\n";
+  echo "define('OAUTH_TOKEN', '".$token['oauth_token']."');\n";
+  echo "define('OAUTH_TOKEN_SECRET', '".$token['oauth_token_secret']."');\n";
+}
+else
+{
+  echo "失敗しました\n";
+}
