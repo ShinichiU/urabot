@@ -8,7 +8,6 @@ require_once realpath('./').'/../default.inc.php';
 
 $twitter = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET);
 
-// Twitterに発言をPOST
 $followers_results = $twitter->get('statuses/followers');
 $http_info_followers = $twitter->http_info;
 $friends_results = $twitter->get('statuses/friends');
