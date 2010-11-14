@@ -39,8 +39,7 @@ EOF;
     if ($results)
     {
       $text = sprintf('%s が %s で %s。', $results['who'], $results['where'], $results['do']);
-//      $twitter->post('statuses/update', array('status' => $text));
+      $twitter->post('statuses/update', array('status' => $text));
     }
-var_dump($text);
   }
 }
