@@ -6,4 +6,5 @@ lib/form/doctrine/base/*
 lib/form/doctrine/*Plugin
 lib/filter/doctrine/base/*
 lib/filter/doctrine/*Plugin
+data/sql
 cache

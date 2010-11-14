@@ -7,13 +7,25 @@
  */
 class KeywordWhoTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object KeywordWhoTable
-     */
-    public static function getInstance()
+  public function uniqueSave($keyword)
+  {
+    $obj = $this->findOneByWho($keyword);
+    if (!$obj)
     {
-        return Doctrine_Core::getTable('KeywordWho');
+      $obj = new KeywordWho();
+      $obj->setWho($keyword);
+      $obj->save();
     }
+
+    return $obj;
+  }
+  /**
+   * Returns an instance of this class.
+   *
+   * @return object KeywordWhoTable
+   */
+  public static function getInstance()
+  {
+    return Doctrine_Core::getTable('KeywordWho');
+  }
 }

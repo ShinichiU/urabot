@@ -7,13 +7,25 @@
  */
 class KeywordWhereTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object KeywordWhereTable
-     */
-    public static function getInstance()
+  public function uniqueSave($keyword)
+  {
+    $obj = $this->findOneByWhere($keyword);
+    if (!$obj)
     {
-        return Doctrine_Core::getTable('KeywordWhere');
+      $obj = new KeywordWhere();
+      $obj->setWhereis($keyword);
+      $obj->save();
     }
+
+    return $obj;
+  }
+  /**
+   * Returns an instance of this class.
+   *
+   * @return object KeywordWhereTable
+   */
+  public static function getInstance()
+  {
+    return Doctrine_Core::getTable('KeywordWhere');
+  }
 }

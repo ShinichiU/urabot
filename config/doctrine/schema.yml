@@ -2,8 +2,18 @@ options:
   charset: utf8
 actAs: [Timestampable]
 
+LastId:
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true, comment: "プライマリーキー" }
+    twitter_id: { type: integer(10), notnull: true, comment: "Twitter Id" }
+    type: { type: integer(2), default: 1, notnull: true, comment: "タイプ" }
+  options:
+    type: INNODB
+    collate: utf8_unicode_ci
+    charset: utf8
+    comment: "誰が"
+
 KeywordWho:
-  actAs: [Timestampable]
   columns:
     id: { type: integer(4), primary: true, autoincrement: true, comment: "プライマリーキー" }
     who: { type: string(64), default: "", notnull: true, comment: "誰が" }
@@ -11,21 +21,17 @@ KeywordWho:
     type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
-    comment: "誰が"
 
 KeywordWhere:
-  actAs: [Timestampable]
   columns:
     id: { type: integer(4), primary: true, autoincrement: true, comment: "プライマリーキー" }
-    where: { type: string(64), default: "", notnull: true, comment: "どこで" }
+    whereis: { type: string(64), default: "", notnull: true, comment: "どこで" }
   options:
     type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
-    comment: "どこで"
 
 KeywordDo:
-  actAs: [Timestampable]
   columns:
     id: { type: integer(4), primary: true, autoincrement: true, comment: "プライマリーキー" }
     do: { type: string(64), default: "", notnull: true, comment: "何をした" }
@@ -33,10 +39,8 @@ KeywordDo:
     type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
-    comment: "何をした"
 
 CreatedHistory:
-  actAs: [Timestampable]
   columns:
     id: { type: integer(4), primary: true, autoincrement: true, comment: "プライマリーキー" }
     keyword_who_id: { type: integer(4), notnull: true, comment: "誰が" }
@@ -46,7 +50,6 @@ CreatedHistory:
     type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
-    comment: "何がどこで何をした"
   relations:
     KeywordWho:
       onDelete: cascade

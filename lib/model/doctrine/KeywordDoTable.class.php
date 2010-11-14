@@ -7,13 +7,26 @@
  */
 class KeywordDoTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object KeywordDoTable
-     */
-    public static function getInstance()
+  public function uniqueSave($keyword)
+  {
+    $obj = $this->findOneByDo($keyword);
+    if (!$obj)
     {
-        return Doctrine_Core::getTable('KeywordDo');
+      $obj = new KeywordDo();
+      $obj->setDo($keyword);
+      $obj->save();
     }
+
+    return $obj;
+  }
+
+  /**
+   * Returns an instance of this class.
+   *
+   * @return object KeywordDoTable
+   */
+  public static function getInstance()
+  {
+      return Doctrine_Core::getTable('KeywordDo');
+  }
 }
