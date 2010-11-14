@@ -1,1 +1,8 @@
 tags
+config/databases.yml
+lib/model/base/*
+lib/model/*Plugin
+lib/form/base/*
+lib/form/*Plugin
+lib/filter/base/*
+lib/filter/*Plugin
