@@ -1,8 +1,9 @@
 tags
 config/databases.yml
-lib/model/base/*
-lib/model/*Plugin
-lib/form/base/*
-lib/form/*Plugin
-lib/filter/base/*
-lib/filter/*Plugin
+lib/model/doctrine/base/*
+lib/model/doctrine/*Plugin
+lib/form/doctrine/base/*
+lib/form/doctrine/*Plugin
+lib/filter/doctrine/base/*
+lib/filter/doctrine/*Plugin
+cache
