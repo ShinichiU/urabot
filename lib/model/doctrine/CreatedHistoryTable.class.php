@@ -25,9 +25,9 @@ class CreatedHistoryTable extends Doctrine_Table
       }
 
       $result = $this->createQuery()
-        ->where('keyword_who_id', $who['id'])
-        ->where('keyword_where_id', $where['id'])
-        ->where('keyword_do_id', $do['id'])
+        ->where('keyword_who_id = ?', $who['id'])
+        ->where('keyword_where_id = ?', $where['id'])
+        ->where('keyword_do_id = ?', $do['id'])
         ->limit(1)
         ->fetchOne(array(), Doctrine::HYDRATE_NONE);
       if ($result)
