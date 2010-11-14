@@ -34,7 +34,7 @@ EOF;
     $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
 
     // add your code here
-    $results = Doctrine::getTable('CreatedHistory')->getRandWords(false, 100);
+    $results = Doctrine::getTable('CreatedHistory')->getRandWords(true, 100);
     $twitter = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET);
     if ($results)
     {
