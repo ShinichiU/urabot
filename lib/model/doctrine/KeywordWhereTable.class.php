@@ -9,7 +9,7 @@ class KeywordWhereTable extends Doctrine_Table
 {
   public function uniqueSave($keyword)
   {
-    $obj = $this->findOneByWhere($keyword);
+    $obj = $this->findOneByWhereis($keyword);
     if (!$obj)
     {
       $obj = new KeywordWhere();

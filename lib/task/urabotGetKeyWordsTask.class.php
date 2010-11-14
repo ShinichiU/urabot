@@ -47,10 +47,13 @@ EOF;
         $this->last_id = $v->id;
       }
 
-      if ($results = $this->saveWords($v->text) && IS_RETURN_MESSAGE)
+      if ($results = $this->saveWords($v->text))
       {
-        $text = sprintf('@%s 登録しました who:"%s" where:"%s" do:"%s"', $v->screen_name, $results['who'], $results['where'], $results['do']);
-        $twitter->post('statuses/update', array('status' => $text));
+        if (IS_RETURN_MESSAGE)
+        {
+          $text = sprintf('@%s 登録しました who:"%s" where:"%s" do:"%s"', $v->user->screen_name, $results['who'], $results['where'], $results['do']);
+          $twitter->post('statuses/update', array('status' => $text));
+        }
       }
     }
 
