@@ -49,7 +49,7 @@ EOF;
 
       if ($results = $this->saveWords($v->text) && IS_RETURN_MESSAGE)
       {
-        $text = sprintf('@%s 登録しました who:"%s" where:"%s" do:"%s"', $v->screen_name, $results['who'], $results['where'], $results['do']);
+        $text = sprintf('.@%s 登録しました who:"%s" where:"%s" do:"%s"', $v->screen_name, $results['who'], $results['where'], $results['do']);
         $twitter->post('statuses/update', array('status' => $text));
       }
     }
