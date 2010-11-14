@@ -22,10 +22,6 @@ class ProjectConfiguration extends sfProjectConfiguration
         self::$user_name = $user->screen_name;
         sfConfig::set('user_name', self::$user_name);
       }
-      else
-      {
-        throw new Exception('ユーザーインフォメーションが取得できませんでした');
-      }
     }
   }
 }

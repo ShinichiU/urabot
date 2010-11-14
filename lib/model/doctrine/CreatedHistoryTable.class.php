@@ -7,13 +7,56 @@
  */
 class CreatedHistoryTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object CreatedHistoryTable
-     */
-    public static function getInstance()
+  public function getRandWords($is_save = true, $limit = 10)
+  {
+    for ($i = 1; $i <= $limit; $i++)
     {
-        return Doctrine_Core::getTable('CreatedHistory');
+      if (!$who = Doctrine::getTable('KeywordWho')->getRand())
+      {
+        return false;
+      }
+      if (!$where = Doctrine::getTable('KeywordWhere')->getRand())
+      {
+        return false;
+      }
+      if (!$do = Doctrine::getTable('KeywordDo')->getRand())
+      {
+        return false;
+      }
+
+      $result = $this->createQuery()
+        ->where('keyword_who_id', $who['id'])
+        ->where('keyword_where_id', $where['id'])
+        ->where('keyword_do_id', $do['id'])
+        ->limit(1)
+        ->fetchOne(array(), Doctrine::HYDRATE_NONE);
+      if ($result)
+      {
+        continue;
+      }
+
+      if ($is_save)
+      {
+        $history = new CreatedHistory();
+        $history->setKeywordWhoId($who['id']);
+        $history->setKeywordWhereId($where['id']);
+        $history->setKeywordDoId($do['id']);
+        $history->save();
+      }
+
+      return array('who' => $who['who'], 'where' => $where['where'], 'do' => $do['do']);
     }
+
+    return false;
+  }
+
+  /**
+   * Returns an instance of this class.
+   *
+   * @return object CreatedHistoryTable
+   */
+  public static function getInstance()
+  {
+    return Doctrine_Core::getTable('CreatedHistory');
+  }
 }

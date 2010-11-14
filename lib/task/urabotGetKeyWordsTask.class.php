@@ -46,7 +46,12 @@ EOF;
       {
         $this->last_id = $v->id;
       }
-      $this->saveWords($v->text);
+
+      if ($results = $this->saveWords($v->text) && IS_RETURN_MESSAGE)
+      {
+        $text = sprintf('@%s 登録しました who:"%s" where:"%s" do:"%s"', $v->screen_name, $results['who'], $results['where'], $results['do']);
+        $twitter->post('statuses/update', array('status' => $text));
+      }
     }
 
     if (null !== $this->last_id)
@@ -65,6 +70,10 @@ EOF;
       Doctrine::getTable('KeywordWho')->uniqueSave($matches[1]);
       Doctrine::getTable('KeywordWhere')->uniqueSave($matches[2]);
       Doctrine::getTable('KeywordDo')->uniqueSave($matches[3]);
+
+      return array('who' => $matches[1], 'where' => $matches[2], 'do' => $matches[3]);
     }
+
+    return false;
   }
 }

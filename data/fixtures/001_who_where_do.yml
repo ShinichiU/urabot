@@ -1,0 +1,29 @@
+KeywordWho:
+  who1:
+    who: 犬
+  who2:
+    who: 人
+  who3:
+    who: 宇宙人
+  who4:
+    who: お茶
+
+KeywordWhere:
+  where1:
+    whereis: トイレ
+  where2:
+    whereis: 宇宙
+  where3:
+    whereis: 体育館
+  where4:
+    whereis: 銀行
+
+KeywordDo:
+  do1:
+    do: 走りだした
+  do2:
+    do: 寝ていた
+  do3:
+    do: 逮捕された
+  do4:
+    do: 爆笑した

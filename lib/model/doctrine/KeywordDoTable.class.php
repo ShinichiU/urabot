@@ -20,6 +20,23 @@ class KeywordDoTable extends Doctrine_Table
     return $obj;
   }
 
+  public function getRand()
+  {
+    $results = $this->createQuery()
+      ->select('id')
+      ->addSelect('do')
+      ->orderBy('RAND()')
+      ->limit(1)
+      ->fetchOne(array(), Doctrine::HYDRATE_NONE);
+
+    if (!$results)
+    {
+      return false;
+    }
+
+    return array('id' => $results[0], 'do' => $results[1]);
+  }
+
   /**
    * Returns an instance of this class.
    *
