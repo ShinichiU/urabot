@@ -44,7 +44,7 @@ EOF;
     {
       if (null === $this->last_id)
       {
-        $this->last_id = $v->id;
+        $this->last_id = $v->str;
       }
 
       if ($results = $this->saveWords($v->text))

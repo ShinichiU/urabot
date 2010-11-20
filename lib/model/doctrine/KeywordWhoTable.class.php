@@ -7,6 +7,8 @@
  */
 class KeywordWhoTable extends Doctrine_Table
 {
+  protected static $count = null;
+
   public function uniqueSave($keyword)
   {
     $obj = $this->findOneByWho($keyword);
@@ -22,10 +24,18 @@ class KeywordWhoTable extends Doctrine_Table
 
   public function getRand()
   {
+    if (null == self::$count)
+    {
+      self::$count = $this->createQuery()
+        ->select('COUNT(*)')
+        ->fetchOne(array(), Doctrine::HYDRATE_NONE);
+    }
+
+    $id = urabotToolkit::getRand(self::$count[0]);
     $results = $this->createQuery()
       ->select('id')
       ->addSelect('who')
-      ->orderBy('RAND()')
+      ->where('id = ?', $id)
       ->limit(1)
       ->fetchOne(array(), Doctrine::HYDRATE_NONE);
 

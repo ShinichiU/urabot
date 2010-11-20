@@ -29,6 +29,8 @@ EOF;
 
   protected function execute($arguments = array(), $options = array())
   {
+    set_time_limit(0);
+    sleep((int)urabotToolkit::getRand(60 * 60 * 2));
     // initialize the database connection
     $databaseManager = new sfDatabaseManager($this->configuration);
     $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
