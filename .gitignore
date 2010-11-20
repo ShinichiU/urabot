@@ -8,3 +8,4 @@ lib/filter/doctrine/base/*
 lib/filter/doctrine/*Plugin
 data/sql
 cache
+log/*
